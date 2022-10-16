@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/patrickmn/go-cache"
+	"l0/http_server"
 	"l0/service"
 	"log"
 )
@@ -10,23 +11,36 @@ func main() {
 
 	c := cache.New(cache.NoExpiration, cache.NoExpiration)
 
-	config := service.NewConfig()
+	serviceConfig := service.NewConfig()
+	serverConfig := http_server.NewConfig()
 
-	s := service.New(config, c)
-	defer s.Close()
+	service := service.New(serviceConfig, c)
+	server := http_server.New(serverConfig, c)
 
-	err := s.Start()
+	err := service.Start()
 	if err != nil {
 		log.Fatal(err)
 	}
+	go func() {
+		err = server.Start()
+		if err != nil {
+			log.Fatal(err)
+		}
+		for {
+		}
+	}()
 
-	err = s.Subscribe("channel1")
-	if err != nil {
-		log.Fatal(err)
-	}
+	go func() {
+		defer service.Close()
+		err = service.Subscribe("channel1")
+		if err != nil {
+			log.Fatal(err)
+		}
+		for {
+		}
+		service.Unsubscribe()
+	}()
+
 	for {
 	}
-
-	s.Unsubscribe()
-
 }
