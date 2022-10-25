@@ -243,7 +243,7 @@ func (s *StreamClient) restoreCacheFromDB() error {
 
 	for _, v := range orders {
 		s.cache.Set(v.Uid, v.Data, cache.NoExpiration)
-		s.logger.Info("Restored from cache with order_uid: " + string(v.Uid))
+		s.logger.Info("Restored from bd to cache with order_uid: " + string(v.Uid))
 	}
 
 	return nil

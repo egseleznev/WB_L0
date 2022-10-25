@@ -1,7 +1,7 @@
 const sc = require('node-nats-streaming').connect('prod', 'publisher')
 
 const data = {
-    "order_uid": "b563feb7b2b84b6te61",
+    "order_uid": "b563feb7b2b84b6s25a",
     "track_number": "WBILMTESTTRACK",
     "entry": "WBIL",
     "delivery": {
