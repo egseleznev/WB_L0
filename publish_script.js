@@ -1,13 +1,13 @@
 const sc = require('node-nats-streaming').connect('prod', 'publisher')
 
 const data = {
-    "order_uid": "b563feb7b2b84b6test",
+    "order_uid": "b563feb7b2b84b6te61",
     "track_number": "WBILMTESTTRACK",
     "entry": "WBIL",
     "delivery": {
         "name": "Test Testov",
         "phone": "+9720000000",
-        "zip": "2639809",
+        "zip": "",
         "city": "Kiryat Mozkin",
         "address": "Ploshad Mira 15",
         "region": "Kraiot",
